@@ -1,0 +1,40 @@
+{
+    "folders": [
+        {
+            "name": "Frontend",
+            "path": "./frontend"
+        },
+        {
+            "name": "Backend",
+            "path": "./"
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "**/target": true,
+            "**/.mvn": true,
+            "**/mvnw": true,
+            "**/mvnw.cmd": true,
+            "**/pom.xml": true,
+            "**/.idea": true,
+            "**/*.iml": true
+        },
+        "search.exclude": {
+            "**/target": true,
+            "**/node_modules": true
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "ritwickdey.LiveServer",
+            "esbenp.prettier-vscode",
+            "ms-vscode.vscode-typescript-next",
+            "bradlc.vscode-tailwindcss",
+            "formulahendry.auto-rename-tag",
+            "christian-kohler.path-intellisense",
+            "ms-vscode.vscode-json",
+            "ms-vscode.vscode-html-css-support",
+            "ms-vscode.vscode-js-debug"
+        ]
+    }
+}
