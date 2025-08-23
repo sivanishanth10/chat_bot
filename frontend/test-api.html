@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test - Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .success { border-color: #28a745; background: #d4edda; }
+        .error { border-color: #dc3545; background: #f8d7da; }
+        .info { border-color: #17a2b8; background: #d1ecf1; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Chatbot API Test Page</h1>
+    
+    <div class="test-section">
+        <h2>1. Backend Health Check</h2>
+        <button onclick="testHealth()">Test Health Endpoint</button>
+        <div id="healthResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. CORS Test</h2>
+        <button onclick="testCORS()">Test CORS Configuration</button>
+        <div id="corsResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Send Test Message</h2>
+        <input type="text" id="testMessage" placeholder="Enter test message" value="Hello, this is a test message" style="width: 300px; padding: 8px; margin-right: 10px;">
+        <button onclick="testSendMessage()">Send Test Message</button>
+        <div id="sendResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Browser Information</h2>
+        <button onclick="showBrowserInfo()">Show Browser Info</button>
+        <div id="browserInfo" class="result"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8080/api';
+
+        function logResult(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `result ${type}`;
+        }
+
+        async function testHealth() {
+            try {
+                logResult('healthResult', 'Testing health endpoint...', 'info');
+                
+                const response = await fetch(`${API_BASE}/chat/health`, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    logResult('healthResult', `✅ Health check successful!\nStatus: ${response.status}\nResponse: ${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    logResult('healthResult', `❌ Health check failed!\nStatus: ${response.status}\nStatus Text: ${response.statusText}`, 'error');
+                }
+            } catch (error) {
+                logResult('healthResult', `❌ Network error: ${error.message}`, 'error');
+            }
+        }
+
+        async function testCORS() {
+            try {
+                logResult('corsResult', 'Testing CORS configuration...', 'info');
+                
+                const response = await fetch(`${API_BASE}/chat/health`, {
+                    method: 'OPTIONS',
+                    credentials: 'include'
+                });
+                
+                const corsHeaders = {
+                    'Access-Control-Allow-Origin': response.headers.get('Access-Control-Allow-Origin'),
+                    'Access-Control-Allow-Methods': response.headers.get('Access-Control-Allow-Methods'),
+                    'Access-Control-Allow-Headers': response.headers.get('Access-Control-Allow-Headers'),
+                    'Access-Control-Allow-Credentials': response.headers.get('Access-Control-Allow-Credentials')
+                };
+                
+                logResult('corsResult', `✅ CORS test completed!\nStatus: ${response.status}\nHeaders: ${JSON.stringify(corsHeaders, null, 2)}`, 'success');
+            } catch (error) {
+                logResult('corsResult', `❌ CORS test failed: ${error.message}`, 'error');
+            }
+        }
+
+        async function testSendMessage() {
+            try {
+                const message = document.getElementById('testMessage').value;
+                logResult('sendResult', 'Sending test message...', 'info');
+                
+                const payload = {
+                    userMessage: message,
+                    sessionId: 'test_session_' + Date.now()
+                };
+                
+                const response = await fetch(`${API_BASE}/chat/send`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(payload)
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    logResult('sendResult', `✅ Message sent successfully!\nStatus: ${response.status}\nResponse: ${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    const errorText = await response.text();
+                    logResult('sendResult', `❌ Failed to send message!\nStatus: ${response.status}\nStatus Text: ${response.statusText}\nResponse: ${errorText}`, 'error');
+                }
+            } catch (error) {
+                logResult('sendResult', `❌ Network error: ${error.message}`, 'error');
+            }
+        }
+
+        function showBrowserInfo() {
+            const info = {
+                'User Agent': navigator.userAgent,
+                'Platform': navigator.platform,
+                'Language': navigator.language,
+                'Cookie Enabled': navigator.cookieEnabled,
+                'Online': navigator.onLine,
+                'Protocol': window.location.protocol,
+                'Host': window.location.host,
+                'Origin': window.location.origin,
+                'Current URL': window.location.href
+            };
+            
+            logResult('browserInfo', `🌐 Browser Information:\n${JSON.stringify(info, null, 2)}`, 'info');
+        }
+
+        // Auto-run health check on page load
+        window.addEventListener('load', () => {
+            setTimeout(testHealth, 1000);
+        });
+    </script>
+</body>
+</html>

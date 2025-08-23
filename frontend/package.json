@@ -1,0 +1,31 @@
+{
+  "name": "ai-chatbot-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for AI Chatbot powered by Google Gemini",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "serve": "node server.js"
+  },
+  "keywords": [
+    "ai",
+    "chatbot",
+    "gemini",
+    "frontend",
+    "javascript"
+  ],
+  "author": "Chatbot Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/ai-chatbot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/ai-chatbot/issues"
+  },
+  "homepage": "https://github.com/your-username/ai-chatbot#readme"
+}

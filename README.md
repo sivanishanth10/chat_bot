@@ -1,331 +1,201 @@
-# AI Chatbot with Spring Boot Backend
+# AI Chatbot - Powered by Google Gemini
 
-A production-ready AI chatbot application built with Spring Boot backend, MySQL database, and a modern HTML/CSS/JavaScript frontend. The chatbot integrates with Google's Gemini AI API to provide intelligent responses.
+A modern, intelligent chatbot application built with Spring Boot backend and vanilla JavaScript frontend, powered by Google's Gemini AI technology.
 
 ## 🚀 Features
 
-- **Intelligent AI Responses**: Powered by Google's Gemini 2.5 Pro model
-- **Real-time Chat Interface**: Modern, responsive chat UI with typing indicators
-- **Session Management**: Persistent chat sessions with unique identifiers
-- **Chat History**: Store and retrieve conversation history from MySQL database
-- **RESTful API**: Clean Spring Boot backend with proper architecture
-- **CORS Enabled**: Frontend can communicate with backend seamlessly
-- **Production Ready**: Includes error handling, validation, and logging
-- **Responsive Design**: Works on desktop, tablet, and mobile devices
+- **Intelligent AI Responses**: Powered by Google's Gemini AI
+- **Real-time Chat**: Instant responses with typing indicators
+- **Chat History**: Persistent chat sessions with local storage
+- **Export Functionality**: Export chat history as JSON
+- **Modern UI**: Beautiful, responsive design
+- **Session Management**: Unique session tracking for analytics
+- **Error Handling**: Comprehensive error handling and user feedback
 
-## 🏗️ Architecture
+## 🛠️ Technology Stack
 
-### Backend (Spring Boot)
-- **Controller Layer**: REST endpoints for chat operations
-- **Service Layer**: Business logic and Gemini API integration
-- **Repository Layer**: Data access with Spring Data JPA
-- **Model Layer**: Entity classes and DTOs
-- **Configuration**: CORS, database, and application properties
+### Backend
+- **Spring Boot 3.2.0**: Java-based web framework
+- **Spring Data JPA**: Database persistence
+- **MySQL**: Database
+- **Google Gemini API**: AI integration
+- **Maven**: Build tool
 
-### Frontend (HTML/CSS/JavaScript)
-- **Modern UI**: Clean, responsive design with CSS Grid and Flexbox
-- **Interactive Chat**: Real-time message handling and display
-- **Local Storage**: Client-side chat history persistence
-- **Error Handling**: User-friendly error messages and modals
-- **Accessibility**: Keyboard navigation and screen reader support
-
-### Database (MySQL)
-- **Chat Messages**: Store user queries and AI responses
-- **Session Tracking**: Link conversations to unique sessions
-- **Performance**: Optimized indexes and efficient queries
-- **Analytics**: Response time tracking and usage statistics
+### Frontend
+- **Vanilla JavaScript**: No framework dependencies
+- **HTML5 & CSS3**: Modern web standards
+- **Font Awesome**: Icons
+- **Google Fonts**: Typography
 
 ## 📋 Prerequisites
 
-- **Java 17** or higher
-- **MySQL 8.0** or higher
-- **Maven 3.6** or higher
-- **Modern web browser** (Chrome, Firefox, Safari, Edge)
+- **Java 17+** (JDK 24.0.1 recommended)
+- **Node.js 14+** (for frontend server)
+- **MySQL 8.0+** (or compatible database)
+- **Google Gemini API Key** (get from [Google AI Studio](https://makersuite.google.com/app/apikey))
 
-## 🛠️ Installation & Setup
+## 🔧 Setup Instructions
 
 ### 1. Clone the Repository
+
 ```bash
 git clone <repository-url>
 cd chat-bot-main
 ```
 
-### 2. Database Setup
-1. **Start MySQL Server**
-   ```bash
-   # Windows
-   net start mysql
-   
-   # macOS/Linux
-   sudo systemctl start mysql
-   ```
+### 2. Backend Setup
 
-2. **Create Database and User**
-   ```sql
-   -- Connect to MySQL as root
-   mysql -u root -p
-   
-   -- Create database
-   CREATE DATABASE chatbot_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-   
-   -- Create user (optional, you can use root)
-   CREATE USER 'chatbot_user'@'localhost' IDENTIFIED BY 'your_password';
-   GRANT ALL PRIVILEGES ON chatbot_db.* TO 'chatbot_user'@'localhost';
-   FLUSH PRIVILEGES;
-   
-   -- Exit MySQL
-   EXIT;
-   ```
-
-3. **Run Schema Script** (optional)
-   ```bash
-   mysql -u root -p chatbot_db < src/main/resources/schema.sql
-   ```
-
-### 3. Configure Application
-1. **Update Database Configuration**
-   Edit `src/main/resources/application.properties`:
-   ```properties
-   spring.datasource.username=your_username
-   spring.datasource.password=your_password
-   ```
-
-2. **Verify Gemini API Key**
-   Ensure your Gemini API key is set in `application.properties`:
-   ```properties
-   gemini.api.key=your_gemini_api_key
-   ```
-
-### 4. Development Setup
-
-#### **Backend (IntelliJ IDEA)**
-1. **Open Project in IntelliJ IDEA**
-   - Open IntelliJ IDEA
-   - Select "Open" or "Import Project"
-   - Navigate to your project folder and select it
-   - Choose "Import project from external model" → "Maven"
-   - Click "Next" and "Finish"
-
-2. **Configure JDK**
-   - Go to `File` → `Project Structure`
-   - Under `Project Settings` → `Project`:
-     - Set `Project SDK` to Java 17
-     - Set `Project language level` to 17
-   - Click "Apply" and "OK"
-
-3. **Run the Application**
-   - Go to `Run` → `Edit Configurations`
-   - Click the "+" button and select "Spring Boot"
-   - Configure:
-     - **Name**: ChatbotApplication
-     - **Main class**: `com.chatbot.ChatbotApplication`
-     - **Module**: `chatbot-backend`
-   - Click "Apply" and "OK"
-   - Click the green play button or press `Shift+F10`
-
-#### **Frontend (VS Code)**
-1. **Open Project in VS Code**
-   ```bash
-   # Open workspace file
-   code chatbot.code-workspace
-   
-   # Or open frontend folder directly
-   code frontend/
-   ```
-
-2. **Install Recommended Extensions**
-   VS Code will prompt you to install recommended extensions:
-   - **Live Server** - For serving the frontend
-   - **Prettier** - Code formatting
-   - **Auto Rename Tag** - HTML tag renaming
-   - **Path Intellisense** - File path autocomplete
-
-3. **Start Frontend Development Server**
-   - Right-click on `frontend/index.html`
-   - Select "Open with Live Server"
-   - Frontend will open at `http://localhost:3000`
-
-### 5. Test the Application
-1. **Start Backend** (IntelliJ IDEA): Run `ChatbotApplication` configuration
-2. **Start Frontend** (VS Code): Use Live Server extension
-3. **Send a Test Message**: Type "Hello, how are you?" and press Enter
-4. **Verify Response**: You should get an AI response from Gemini
-
-## 🔧 Configuration
-
-### Environment Variables
-You can override configuration using environment variables:
-
-```bash
-export SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/chatbot_db
-export SPRING_DATASOURCE_USERNAME=your_username
-export SPRING_DATASOURCE_PASSWORD=your_password
-export GEMINI_API_KEY=your_api_key
+#### Configure Database
+1. Create a MySQL database:
+```sql
+CREATE DATABASE chatbot_db;
 ```
 
-### Application Properties
-Key configuration options in `application.properties`:
-
+2. Update database configuration in `backend/src/main/resources/application.properties`:
 ```properties
-# Server
-server.port=8080
-server.servlet.context-path=/api
-
-# Database
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-
-# Gemini API
-gemini.api.url=https://generativelanguage.googleapis.com/v1/models/gemini-2.5-pro:generateContent
-
-# CORS
-spring.web.cors.allowed-origins=http://localhost:3000,http://127.0.0.1:3000
+spring.datasource.url=jdbc:mysql://localhost:3306/chatbot_db
+spring.datasource.username=your_username
+spring.datasource.password=your_password
 ```
 
-## 📚 API Endpoints
-
-### Chat Operations
-- `POST /api/chat/send` - Send a message and get AI response
-- `GET /api/chat/history/{sessionId}` - Get chat history for a session
-- `GET /api/chat/recent` - Get recent messages across all sessions
-- `GET /api/chat/stats/{sessionId}` - Get session statistics
-- `DELETE /api/chat/history/{sessionId}` - Delete session history
-
-### Health & Status
-- `GET /api/chat/health` - Health check endpoint
-
-### Request/Response Format
-
-**Send Message Request:**
-```json
-{
-  "userMessage": "Hello, how are you?",
-  "sessionId": "session_123456789"
-}
+#### Configure Gemini API
+1. Get your API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Add it to `backend/src/main/resources/application.properties`:
+```properties
+gemini.api.key=your_gemini_api_key_here
 ```
 
-**Chat Response:**
-```json
-{
-  "aiResponse": "Hello! I'm doing well, thank you for asking...",
-  "sessionId": "session_123456789",
-  "timestamp": "2024-01-15T10:30:00",
-  "responseTimeMs": 1250,
-  "status": "SUCCESS"
-}
-```
-
-## 🎨 Frontend Customization
-
-### Styling
-- **CSS Variables**: Easy color and spacing customization in `styles.css`
-- **Responsive Design**: Mobile-first approach with breakpoints
-- **Dark Mode**: Automatic dark mode support based on system preferences
-- **Accessibility**: High contrast mode and reduced motion support
-
-### JavaScript
-- **Modular Architecture**: Clean class-based structure
-- **Event Handling**: Comprehensive event management
-- **Local Storage**: Persistent chat history
-- **Error Handling**: User-friendly error messages
-
-## 🚀 Deployment
-
-### Production Considerations
-1. **Environment Variables**: Use environment variables for sensitive data
-2. **Database**: Use production-grade MySQL with proper backups
-3. **Security**: Enable HTTPS, implement rate limiting
-4. **Monitoring**: Add application monitoring and logging
-5. **Scaling**: Consider containerization with Docker
-
-### Docker Deployment
-```dockerfile
-FROM openjdk:17-jre-slim
-COPY target/chatbot-backend-1.0.0.jar app.jar
-EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app.jar"]
-```
-
-## 🧪 Testing
-
-### Backend Testing
+#### Run Backend
 ```bash
-# Run unit tests
-./mvnw test
-
-# Run integration tests
-./mvnw verify
-
-# Generate test coverage report
-./mvnw jacoco:report
+cd backend
+./mvnw spring-boot:run
 ```
 
-### Frontend Testing
-- Open browser developer tools
-- Check console for any JavaScript errors
-- Test responsive design on different screen sizes
-- Verify accessibility features
+The backend will start on `http://localhost:8080/api`
 
-## 📊 Monitoring & Logging
+### 3. Frontend Setup
 
-### Application Logs
-- **Log Level**: Configurable via `application.properties`
-- **Structured Logging**: JSON format for production environments
-- **Performance Metrics**: Response time tracking and database query logging
+#### Option 1: Using Node.js Server (Recommended)
+```bash
+cd frontend
+npm start
+```
 
-### Health Checks
-- **Database Connectivity**: Automatic health checks
-- **API Status**: Health endpoint for monitoring
-- **Gemini API**: Integration status monitoring
+The frontend will be available at `http://localhost:3000`
 
-## 🔒 Security Features
+#### Option 2: Direct File Access
+Simply open `frontend/index.html` in your browser. The CORS configuration has been updated to handle this scenario.
 
-- **Input Validation**: Request validation with Bean Validation
-- **SQL Injection Protection**: JPA/Hibernate parameterized queries
-- **CORS Configuration**: Controlled cross-origin access
-- **Error Handling**: Secure error messages without information leakage
+## 🚀 Running the Application
+
+1. **Start the Backend**:
+   ```bash
+   cd backend
+   ./mvnw spring-boot:run
+   ```
+
+2. **Start the Frontend** (if using Node.js server):
+   ```bash
+   cd frontend
+   npm start
+   ```
+
+3. **Access the Application**:
+   - Frontend: `http://localhost:3000` (if using Node.js server)
+   - Frontend: Open `frontend/index.html` directly in browser
+   - Backend API: `http://localhost:8080/api`
+
+## 🔍 API Endpoints
+
+- `POST /api/chat/send` - Send a message to the AI
+- `GET /api/chat/history` - Get chat history (if implemented)
+- `GET /api/health` - Health check endpoint
+
+## 🐛 Troubleshooting
+
+### CORS Issues
+If you encounter CORS errors:
+
+1. **For file:// URLs**: The CORS configuration has been updated to allow `null` origin
+2. **For localhost**: Use the Node.js server (`npm start`) instead of opening files directly
+3. **Check browser console**: Look for CORS-related error messages
+
+### Database Connection Issues
+1. Ensure MySQL is running
+2. Verify database credentials in `application.properties`
+3. Check if the database exists
+
+### Gemini API Issues
+1. Verify your API key is correct
+2. Check API quota and limits
+3. Ensure the API key has proper permissions
+
+### Port Conflicts
+- Backend: Change port in `application.properties` if 8080 is in use
+- Frontend: Change `PORT` variable in `server.js` if 3000 is in use
+
+## 📁 Project Structure
+
+```
+chat-bot-main/
+├── backend/
+│   ├── src/main/java/com/chatbot/
+│   │   ├── ChatbotApplication.java
+│   │   ├── config/
+│   │   ├── controller/
+│   │   ├── dto/
+│   │   ├── model/
+│   │   ├── repository/
+│   │   └── service/
+│   ├── src/main/resources/
+│   └── pom.xml
+├── frontend/
+│   ├── index.html
+│   ├── script.js
+│   ├── styles.css
+│   ├── server.js
+│   └── package.json
+└── README.md
+```
+
+## 🔒 Security Considerations
+
+- API keys should be stored in environment variables in production
+- Implement proper authentication for production use
+- Consider rate limiting for API endpoints
+- Validate and sanitize user inputs
+
+## 📝 Development
+
+### Adding New Features
+1. Backend: Add new endpoints in `ChatController`
+2. Frontend: Extend the `ChatbotApp` class in `script.js`
+3. Database: Add new entities in the `model` package
+
+### Testing
+- Backend: Use Spring Boot Test framework
+- Frontend: Test manually or add unit tests
+- API: Use tools like Postman or curl
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
-## 📝 License
+## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 🙏 Acknowledgments
 
-- **Google Gemini AI**: For providing the AI capabilities
-- **Spring Boot Team**: For the excellent framework
-- **MySQL Community**: For the reliable database
-- **Open Source Community**: For various libraries and tools
-
-## 📞 Support
-
-If you encounter any issues or have questions:
-
-1. **Check the logs** for error messages
-2. **Verify configuration** in `application.properties`
-3. **Test database connectivity** manually
-4. **Check Gemini API key** validity
-5. **Open an issue** on the repository
-
-## 🔄 Updates & Maintenance
-
-### Regular Maintenance
-- **Dependencies**: Update Spring Boot and other dependencies regularly
-- **Security**: Monitor for security vulnerabilities
-- **Performance**: Monitor response times and database performance
-- **Backups**: Regular database backups
-
-### Version History
-- **v1.0.0**: Initial release with core functionality
-- **Future**: Enhanced features, performance improvements, and security updates
+- Google Gemini AI for providing the AI capabilities
+- Spring Boot team for the excellent framework
+- Font Awesome for the beautiful icons
+- The open-source community for inspiration and tools
 
 ---
 
-**Happy Chatting! 🤖✨**
+**Happy Chatting! 🤖💬**
