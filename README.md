@@ -4,35 +4,35 @@ A modern, intelligent chatbot application built with Spring Boot backend and van
 
 ## 🚀 Features
 
-- **Intelligent AI Responses**: Powered by Google's Gemini AI
-- **Real-time Chat**: Instant responses with typing indicators
-- **Chat History**: Persistent chat sessions with local storage
-- **Export Functionality**: Export chat history as JSON
-- **Modern UI**: Beautiful, responsive design
-- **Session Management**: Unique session tracking for analytics
-- **Error Handling**: Comprehensive error handling and user feedback
+- Intelligent AI Responses: Powered by Google's Gemini AI
+- Real-time Chat: Instant responses with typing indicators
+- Chat History: Persistent chat sessions with local storage
+- Export Functionality: Export chat history as JSON
+- Modern UI: Beautiful, responsive design
+- Session Management: Unique session tracking for analytics
+- Error Handling: Comprehensive error handling and user feedback
 
 ## 🛠️ Technology Stack
 
 ### Backend
-- **Spring Boot 3.2.0**: Java-based web framework
-- **Spring Data JPA**: Database persistence
-- **MySQL**: Database
-- **Google Gemini API**: AI integration
-- **Maven**: Build tool
+- Spring Boot 3.2.0: Java-based web framework
+- Spring Data JPA: Database persistence
+- MySQL: Database
+- Google Gemini API: AI integration
+- Maven: Build tool
 
 ### Frontend
-- **Vanilla JavaScript**: No framework dependencies
-- **HTML5 & CSS3**: Modern web standards
-- **Font Awesome**: Icons
-- **Google Fonts**: Typography
+- Vanilla JavaScript: No framework dependencies
+- HTML5 & CSS3: Modern web standards
+- Font Awesome: Icons
+- Google Fonts: Typography
 
 ## 📋 Prerequisites
 
-- **Java 17+** (JDK 24.0.1 recommended)
-- **Node.js 14+** (for frontend server)
-- **MySQL 8.0+** (or compatible database)
-- **Google Gemini API Key** (get from [Google AI Studio](https://makersuite.google.com/app/apikey))
+- Java 17+ (JDK 24.0.1 recommended)
+- Node.js 14+ (for frontend server)
+- MySQL 8.0+ (or compatible database)
+- Google Gemini API Key*(get from [Google AI Studio](https://makersuite.google.com/app/apikey))
 
 ## 🔧 Setup Instructions
 
@@ -177,14 +177,6 @@ chat-bot-main/
 - Frontend: Test manually or add unit tests
 - API: Use tools like Postman or curl
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
@@ -198,4 +190,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-**Happy Chatting! 🤖💬**
+ 
